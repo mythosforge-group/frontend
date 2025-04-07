@@ -3,7 +3,7 @@ const Hero = () => {
     <section className="bg-gradient-to-br from-purple-700 to-indigo-900 text-white p-16 text-center">
       <h1 className="text-5xl font-bold mb-4">Welcome to Fable Mind’s</h1>
       <p className="text-xl mb-6">
-        Create epic RPG stories with AI-guided creativity
+        Creates epic RPG stories with AI-guided creativity
       </p>
       <div className="space-x-4">
         <a
