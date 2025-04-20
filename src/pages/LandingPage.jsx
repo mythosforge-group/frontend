@@ -20,7 +20,6 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* Conteúdo com fundo de papel */}
       <div className="bg-rpg-parchment bg-[#fbf4dd]">
         {/* Hero */}
         <section className="text-center py-16 px-4 max-w-4xl mx-auto">

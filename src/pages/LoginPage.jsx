@@ -17,7 +17,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#fdf6e3]">
+    <div className="min-h-screen flex items-center justify-center bg-login-back">
       <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
         <h2 className="text-3xl font-bold mb-6 text-[#2c1a0f]">Login</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}

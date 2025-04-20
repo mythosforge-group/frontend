@@ -8,6 +8,8 @@ export default {
       },
       backgroundImage: {
         "rpg-parchment": "url('/back.jpg')",
+        "login-back": "url(/op.png)",
+        "register-back": "url(/project-fantasy-io-interactive.jpg)",
       },
     },
   },
