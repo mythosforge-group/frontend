@@ -7,7 +7,7 @@ export default {
         cinzel: ['"Cinzel"', "serif"],
       },
       backgroundImage: {
-        "rpg-parchment": "url('src/assets/2150743792.jpg')",
+        "rpg-parchment": "url('/back.jpg')",
       },
     },
   },
