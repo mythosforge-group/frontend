@@ -1,16 +1,34 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { login } from "@/services/authServices";
+import { jwtDecode } from "jwt-decode";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setError("");
+
     if (username && password) {
-      // Lógica de autenticação (simulada)
-      alert("Login realizado com sucesso!");
+      try {
+        const data = await login({ username, password });
+        const decoded = jwtDecode(data.token);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ username: decoded.sub, email: decoded.email })
+        );
+
+        navigate("/home");
+      } catch (err) {
+        console.error(err);
+        setError("Usuário ou senha inválidos");
+      }
     } else {
       setError("Por favor, preencha todos os campos.");
     }
