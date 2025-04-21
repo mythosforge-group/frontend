@@ -13,4 +13,13 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:8080", // Backend
+        changeOrigin: true, // Muda a origem do header de requisição para o backend
+        secure: false, // Para aceitar certificados SSL não válidos (se estiver usando http)
+      }, // Redireciona as requisições de /api para o backend
+    },
+  },
 });

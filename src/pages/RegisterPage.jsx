@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import { Button } from "@/components/ui/button";
 
 export default function RegisterPage() {
@@ -7,13 +8,26 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+    setError("");
+
     if (username && email && password) {
-      // Lógica de registro (simulada)
-      alert("Cadastro realizado com sucesso!");
+      try {
+        // eslint-disable-next-line no-unused-vars
+        const response = await axios.post("/api/users", {
+          // Utilizando a URL relativa
+          username,
+          email,
+          password,
+        });
+        alert("Cadastro realizado com sucesso!");
+      } catch (err) {
+        console.log("Erro ao fazer requisição:", err);
+        setError(err.response?.data?.message || "Erro desconhecido");
+      }
     } else {
-      setError("Por favor, preencha todos os campos.");
+      setError("Preencha todos os campos.");
     }
   };
 
