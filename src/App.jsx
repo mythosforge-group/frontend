@@ -3,6 +3,7 @@ import LandingPage from "./pages/LandingPage"; // Supondo que LandingPage seja s
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
+import UserManagementPage from "./pages/UserManagementPage"; // Página de gerenciamento de usuários
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/user-management" element={<UserManagementPage />} />
       </Routes>
     </Router>
   );

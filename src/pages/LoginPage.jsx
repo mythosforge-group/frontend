@@ -21,9 +21,12 @@ export default function LoginPage() {
         localStorage.setItem("token", data.token);
         localStorage.setItem(
           "user",
-          JSON.stringify({ username: decoded.sub, email: decoded.email })
+          JSON.stringify({
+            id: decoded.id, 
+            username: decoded.sub, 
+            email: decoded.email 
+          })
         );
-
         navigate("/home");
       } catch (err) {
         console.error(err);
