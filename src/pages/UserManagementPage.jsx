@@ -42,6 +42,7 @@ export default function UserManagementPage() {
           Authorization: `Bearer ${token}`,
         },
       });
+      alert("Conta deletada com sucesso!");
       localStorage.clear();
       navigate("/");
     } catch (err) {

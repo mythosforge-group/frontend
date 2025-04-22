@@ -1,12 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
+import { login } from "@/services/authServices";
+import { jwtDecode } from "jwt-decode";
 
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -21,7 +25,19 @@ export default function RegisterPage() {
           email,
           password,
         });
+        const data = await login({ username, password });
+        const decoded = jwtDecode(data.token);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            id: decoded.id, 
+            username: decoded.sub, 
+            email: decoded.email 
+          })
+        );
         alert("Cadastro realizado com sucesso!");
+        navigate("/home");
       } catch (err) {
         console.log("Erro ao fazer requisição:", err);
         setError(err.response?.data?.message || "Erro desconhecido");
