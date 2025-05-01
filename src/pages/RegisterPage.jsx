@@ -1,12 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -22,6 +24,7 @@ export default function RegisterPage() {
           password,
         });
         alert("Cadastro realizado com sucesso!");
+        navigate("/");
       } catch (err) {
         console.log("Erro ao fazer requisição:", err);
         setError(err.response?.data?.message || "Erro desconhecido");

@@ -7,13 +7,18 @@ const storedUser = JSON.parse(localStorage.getItem("user"));
 const storedToken = localStorage.getItem("token");
 
 export default function HomePage() {
-  const [user] = useState(storedUser);
+  const [user, setUser] = useState(storedUser);
   const [token] = useState(storedToken);
   const [campaigns, setCampaigns] = useState([]);
   const [newCampaignName, setNewCampaignName] = useState("");
   const [newCampaignDescription, setNewCampaignDescription] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const updatedUser = JSON.parse(localStorage.getItem("user"));
+    setUser(updatedUser);
+  }, []);
 
   useEffect(() => {
     const fetchCampaigns = async () => {

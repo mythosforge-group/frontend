@@ -23,7 +23,7 @@ export default function LoginPage() {
           "user",
           JSON.stringify({
             id: decoded.id, 
-            username: decoded.sub, 
+            username: decoded.username, 
             email: decoded.email 
           })
         );

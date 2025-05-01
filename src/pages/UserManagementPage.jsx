@@ -1,20 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 
 export default function UserManagementPage() {
   const navigate = useNavigate();
-  const userStored = JSON.parse(localStorage.getItem("user"));
+  const [userStored, setUserStored] = useState(JSON.parse(localStorage.getItem("user")));
   const token = localStorage.getItem("token");
   const [username, setUsername] = useState(userStored.username);
   const [email, setEmail] = useState(userStored.email);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+  useEffect(() => {
+    const updatedUser = JSON.parse(localStorage.getItem("user"));
+    setUserStored(updatedUser);
+    setUsername(updatedUser.username);
+    setEmail(updatedUser.email);
+  }, []);
+
   const handleUpdate = async () => {
     try {
-      await axios.put(
+      const response = await axios.put(
         `/api/users/${userStored.id}`,
         { username, email },
         {
@@ -23,8 +30,18 @@ export default function UserManagementPage() {
           },
         }
       );
-      localStorage.setItem("user", JSON.stringify({ ...userStored, username, email}));
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          id: response.data.id,
+          username: response.data.username,
+          email: response.data.email
+        })
+      );
       setSuccess("Dados atualizados com sucesso!");
+      setTimeout(() => {
+        location.reload();
+      }, 3000);
       setError("");
     } catch (err) {
       console.error(err);
